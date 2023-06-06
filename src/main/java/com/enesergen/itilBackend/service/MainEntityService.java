@@ -191,21 +191,24 @@ public class MainEntityService {
         }
     }
 
-    public String report(AddMainEntityRequestDto requestDto) {
-        return new StringBuilder()
-                .append(Constant.ENTRY)
-                .append(responseTimeReport(requestDto.getResponseTime()))
-                .append(maintenanceTimeReport(requestDto.getMaintenanceTime()))
-                .append(interruptionTimeReport(requestDto.getInterruptionTime()))
-                .append(backUpTimeReport(requestDto.getBackUpTime()))
-                .append(recoveryTimeReport(requestDto.getRecoveryTime()))
-                .append(monitoringReport(requestDto.getMonitoring()))
-                .append(memoryUsageReport(requestDto.getMemoryUsage()))
-                .append(networkUsageReport(requestDto.getNetworkUsage()))
-                .append(cpuUsageReport(requestDto.getCpuUsage()))
-                .append(diskUsageReport(requestDto.getDiskUsage()))
-                .append(Constant.CONCLUSION)
-                .toString();
+    public List<String> report(AddMainEntityRequestDto requestDto) {
+        return new ArrayList<String>(List.of(
+                Constant.ENTRY,
+                responseTimeReport(requestDto.getResponseTime()),
+                maintenanceTimeReport(requestDto.getMaintenanceTime()),
+                interruptionTimeReport(requestDto.getInterruptionTime()),
+                backUpTimeReport(requestDto.getBackUpTime()),
+                recoveryTimeReport(requestDto.getRecoveryTime()),
+                monitoringReport(requestDto.getMonitoring()),
+                memoryUsageReport(requestDto.getMemoryUsage()),
+                networkUsageReport(requestDto.getNetworkUsage()),
+                cpuUsageReport(requestDto.getCpuUsage()),
+                diskUsageReport(requestDto.getDiskUsage()),
+                Constant.CONCLUSION
+            )
+        );
+
+
     }
 
     public List<CircleChart> circleChartList(AddMainEntityRequestDto requestDto) {
@@ -221,28 +224,31 @@ public class MainEntityService {
         var diskUsagePoint = requestDto.getDiskUsage() * requestDto.getDiskUsageSeverity();
         var totalPoint = responseTimePoint + maintenanceTimePoint + interruptionTimePoint + backUpTimePoint + recoveryTimePoint + monitoringPoint + networkUsagePoint + memoryUsagePoint + cpuUsagePoint + diskUsagePoint;
         List<CircleChart> circleChartList = new ArrayList<>();
-        circleChartList.add(new CircleChart("Response Time", responseTimePoint,(float) responseTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Maintenance Time", maintenanceTimePoint,(float) maintenanceTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Interruption Time",interruptionTimePoint, (float) interruptionTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Back Up Time", backUpTimePoint,(float) backUpTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Recovery Time", recoveryTimePoint,(float) recoveryTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Monitoring", monitoringPoint,(float) monitoringPoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Network Usage",networkUsagePoint, (float) networkUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Memory Usage", memoryUsagePoint,(float) memoryUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("CPU Usage",cpuUsagePoint, (float) cpuUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Disk Usage", diskUsagePoint,(float) diskUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Response Time", responseTimePoint, (float) responseTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Maintenance Time", maintenanceTimePoint, (float) maintenanceTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Interruption Time", interruptionTimePoint, (float) interruptionTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Back Up Time", backUpTimePoint, (float) backUpTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Recovery Time", recoveryTimePoint, (float) recoveryTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Monitoring", monitoringPoint, (float) monitoringPoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Network Usage", networkUsagePoint, (float) networkUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Memory Usage", memoryUsagePoint, (float) memoryUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("CPU Usage", cpuUsagePoint, (float) cpuUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Disk Usage", diskUsagePoint, (float) diskUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
         return circleChartList;
     }
-    public int calculateTotalPoint(List<CircleChart> circleChartList){
-        AtomicInteger sum= new AtomicInteger();
-        circleChartList.forEach(item->{
+
+    public int calculateTotalPoint(List<CircleChart> circleChartList) {
+        AtomicInteger sum = new AtomicInteger();
+        circleChartList.forEach(item -> {
             sum.addAndGet(item.getPoint());
         });
         return sum.get();
     }
+
     public AddMainEntityResponseDto addMainEntity(AddMainEntityRequestDto requestDto) {
         var entityObj = dtoToObject(requestDto);
         mainEntityRepository.save(entityObj);
-        return new AddMainEntityResponseDto(report(requestDto),circleChartList(requestDto),calculateTotalPoint(circleChartList(requestDto)));
+        System.out.println(report(requestDto));
+        return new AddMainEntityResponseDto(report(requestDto), circleChartList(requestDto), calculateTotalPoint(circleChartList(requestDto)));
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddMainEntityResponseDto {
-    private String report;
+    private List<String> report;
     private List<CircleChart> circleChartList;
     private int totalPoint;
 }
