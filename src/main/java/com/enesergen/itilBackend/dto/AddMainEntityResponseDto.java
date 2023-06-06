@@ -1,7 +1,8 @@
 package com.enesergen.itilBackend.dto;
 
-import jakarta.annotation.Nullable;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -9,5 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddMainEntityResponseDto {
-    private String msg;
+    private String report;
+    private List<CircleChart> circleChartList;
+    private int totalPoint;
 }
