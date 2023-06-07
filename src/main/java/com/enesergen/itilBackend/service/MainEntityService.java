@@ -225,15 +225,15 @@ public class MainEntityService {
         var totalPoint = responseTimePoint + maintenanceTimePoint + interruptionTimePoint + backUpTimePoint + recoveryTimePoint + monitoringPoint + networkUsagePoint + memoryUsagePoint + cpuUsagePoint + diskUsagePoint;
         List<CircleChart> circleChartList = new ArrayList<>();
         circleChartList.add(new CircleChart("Response Time", responseTimePoint, (float) responseTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Maintenance Time", maintenanceTimePoint, (float) maintenanceTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Interruption Time", interruptionTimePoint, (float) interruptionTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Back Up Time", backUpTimePoint, (float) backUpTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Recovery Time", recoveryTimePoint, (float) recoveryTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Monitoring", monitoringPoint, (float) monitoringPoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Network Usage", networkUsagePoint, (float) networkUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Memory Usage", memoryUsagePoint, (float) memoryUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("CPU Usage", cpuUsagePoint, (float) cpuUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
-        circleChartList.add(new CircleChart("Disk Usage", diskUsagePoint, (float) diskUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) responseTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Maintenance Time", maintenanceTimePoint, (float) maintenanceTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) maintenanceTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Interruption Time", interruptionTimePoint, (float) interruptionTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) interruptionTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Back Up Time", backUpTimePoint, (float) backUpTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) backUpTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Recovery Time", recoveryTimePoint, (float) recoveryTimePoint / totalPoint * 100, new StringBuilder().append("%").append((float) recoveryTimePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Monitoring", monitoringPoint, (float) monitoringPoint / totalPoint * 100, new StringBuilder().append("%").append((float) monitoringPoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Network Usage", networkUsagePoint, (float) networkUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) networkUsagePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Memory Usage", memoryUsagePoint, (float) memoryUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) memoryUsagePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("CPU Usage", cpuUsagePoint, (float) cpuUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) cpuUsagePoint / totalPoint * 100).toString()));
+        circleChartList.add(new CircleChart("Disk Usage", diskUsagePoint, (float) diskUsagePoint / totalPoint * 100, new StringBuilder().append("%").append((float) diskUsagePoint / totalPoint * 100).toString()));
         return circleChartList;
     }
 
